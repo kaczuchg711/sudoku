@@ -9,5 +9,7 @@ public class Main
     {
         SudokuView sv = new SudokuView();
         sv.setVisible(true);
+
+
     }
 }

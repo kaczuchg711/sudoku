@@ -12,7 +12,7 @@ public class SudokuView extends JFrame
     public SudokuView()
     {
         setMinimumSize(new Dimension(WIDTH,HEIGHT));
-        this.panel = new BoardPanel();
+        this.panel = new BoardPanel(3,3);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setTitle("Sudoku");
         this.getContentPane().setBackground(new Color(50,50,50));

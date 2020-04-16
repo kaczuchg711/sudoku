@@ -5,24 +5,39 @@ import java.awt.*;
 
 public class BoardPanel extends JPanel
 {
+    private TextField[][] numberBoxes;
 
-    private NumberField[][] numberFieldTab;
-
-    public BoardPanel()
+    public BoardPanel(int rows,int cols)
     {
+        GridLayout gl = new GridLayout(rows,cols);
+        this.setLayout(new GridLayout(rows,cols));
+        numberBoxes = new TextField[rows][cols];
 
-        this.setLayout(new GridLayout(9,9));
-
-        numberFieldTab = new NumberField[9][9];
-        for (int i = 0; i < 9; i++)
+        for (int i = 0; i < rows; i++)
         {
-            for (int j = 0; j < 9; j++)
+            for (int j = 0; j < cols; j++)
             {
-                numberFieldTab[i][j] = new NumberField();
-                this.add(numberFieldTab[i][j]);
+                this.numberBoxes[i][j] = new TextField("1");
             }
         }
 
+    }
+}
 
+class NumberBox extends JComponent
+{
+    NumberField[][] nf;
+    public NumberBox(int rows,int cols)
+    {
+        this.setLayout(new GridLayout(rows,cols));
+        nf = new NumberField[rows][cols];
+        for (int i = 0; i < rows; i++)
+        {
+            for (int j = 0; j < cols; j++)
+            {
+                nf[i][j] = new NumberField();
+                this.add(nf[i][j]);
+            }
+        }
     }
 }

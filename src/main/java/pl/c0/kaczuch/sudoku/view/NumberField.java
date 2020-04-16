@@ -8,6 +8,5 @@ public class NumberField extends JTextField
     public NumberField()
     {
         super();
-        this.setMinimumSize(new Dimension(10,10));
     }
 }

@@ -21,7 +21,6 @@ public class BoardPanel extends JPanel
                 this.add(this.numberBoxes[i][j]);
             }
         }
-
     }
 }
 

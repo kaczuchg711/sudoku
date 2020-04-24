@@ -10,8 +10,9 @@ public class BoardPanel extends JPanel
     public BoardPanel(int rows, int cols)
     {
         GridLayout gl = new GridLayout(rows, cols);
-        this.setLayout(new GridLayout(rows, cols));
-        numberBoxes = new NumberBox[rows][cols];
+        this.setLayout(new GridLayout(rows, cols,3,3));
+        this.setBackground(new Color(0,0,0));
+        this.numberBoxes = new NumberBox[rows][cols];
 
         for (int i = 0; i < rows; i++)
         {

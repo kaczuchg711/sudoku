@@ -9,7 +9,8 @@ class NumberBox extends JComponent
 
     public NumberBox(int rows, int cols)
     {
-        this.setLayout(new GridLayout(rows, cols));
+        this.setLayout(new GridLayout(rows, cols,1,1));
+        this.setBackground(Color.BLACK);
         nf = new NumberField[rows][cols];
 
         for (int i = 0; i < rows; i++)

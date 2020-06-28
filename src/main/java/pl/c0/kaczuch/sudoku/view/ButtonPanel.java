@@ -32,9 +32,7 @@ public class ButtonPanel extends JPanel
         this.buttons = new JButton[texts.length];
 
         for (int i = 0; i < texts.length; i++)
-        {
             this.buttons[i] = new JButton(texts[i]);
-        }
 
         this.setLayout(new GridLayout(texts.length, 1));
 
@@ -45,5 +43,26 @@ public class ButtonPanel extends JPanel
             this.add(a);
         }
         this.setVisible(true);
+    }
+
+    public JButton getButton(String text)
+    {
+        try
+        {
+            JButton out;
+            for (JButton b : this.buttons)
+                if (b.getText().equals(text))
+                {
+                    out = b;
+                    return out;
+                }
+            throw new NullPointerException("Button not found");
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }

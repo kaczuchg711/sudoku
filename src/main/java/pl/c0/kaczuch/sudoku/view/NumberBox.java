@@ -22,4 +22,9 @@ class NumberBox extends JComponent
             }
         }
     }
+
+    public NumberField[][] getNf()
+    {
+        return nf;
+    }
 }

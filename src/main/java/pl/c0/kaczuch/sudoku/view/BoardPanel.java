@@ -23,6 +23,11 @@ public class BoardPanel extends JPanel
             }
         }
     }
+
+    public NumberBox[][] getNumberBoxes()
+    {
+        return numberBoxes;
+    }
 }
 
 

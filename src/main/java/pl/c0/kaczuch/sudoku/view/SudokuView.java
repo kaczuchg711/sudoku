@@ -13,18 +13,17 @@ public class SudokuView extends JFrame
     private static final int HEIGHT = 600;
 
 
-
     public SudokuView()
     {
-        this.buttonPanel = new ButtonPanel("gen","cos1","cos2");
-        this.boardPanel = new BoardPanel(3,3);
+        this.buttonPanel = new ButtonPanel("gen", "cos1", "cos2");
+        this.boardPanel = new BoardPanel(3, 3);
 
-        this.setLayout(new GridLayout(1,2));
+        this.setLayout(new GridLayout(1, 2));
 
-        setMinimumSize(new Dimension(WIDTH,HEIGHT));
+        setMinimumSize(new Dimension(WIDTH, HEIGHT));
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setTitle("Sudoku");
-        this.getContentPane().setBackground(new Color(255,0,0));
+        this.getContentPane().setBackground(new Color(255, 0, 0));
 
         this.add(this.boardPanel);
         this.add(this.buttonPanel);
@@ -44,25 +43,13 @@ public class SudokuView extends JFrame
 
     public void genNumbers(int[][] numbers)
     {
-        for (int i = 0; i < numbers.length ; i++)
-        {
-            for (int j = 0; j < numbers.length; j++)
-            {
-                this.boardPanel.getNumberBoxes()[i%3][0].getNf()[0][0].setNumber(numbers[i][j]);
-                System.out.println("["+(i%3)   +"]"+"["+0+"]"+        "["+0+"]"+"["+0+"]");
-//           1.                                    0  0          0  0
-//                                                 0  0          0  1
-//                                                 0  0          0  2
-//                                                 0  1          0  0
-//                                                 0  1          0  0
-//                                                 0  1          0  0
-//                                                 1  0          0  0
-//                                                 1  0          0  0
-//                                                 1  0          0  0
-//                                                 1  1          0  0
 
-
-            }
-        }
+        for (int i = 0; i < 3; i++)
+            for (int j = 0; j < 3; j++)
+                for (int ii = 0; ii < 3; ii++)
+                    for (int jj = 0; jj < 3; jj++)
+                    {
+                        this.boardPanel.getNumberBoxes()[i][j].getNf()[ii][jj].setNumber(numbers[ii + i * 3][jj + j * 3]);
+                    }
     }
 }

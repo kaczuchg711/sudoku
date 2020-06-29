@@ -9,7 +9,6 @@ public class SudokuModel
     public int[][] get_numbers_from_file()
     {
         File f = new File(System.getProperty("user.dir") + "/src/main/java/pl/c0/kaczuch/sudoku/model/numbers.txt");
-        System.out.println(f.exists());
         int[][] numbers = new int[9][9];
         try
         {

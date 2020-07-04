@@ -1,6 +1,9 @@
 package pl.c0.kaczuch.sudoku.controller;
 
+import org.w3c.dom.Text;
 import pl.c0.kaczuch.sudoku.model.SudokuModel;
+import pl.c0.kaczuch.sudoku.view.NumberBox;
+import pl.c0.kaczuch.sudoku.view.NumberField;
 import pl.c0.kaczuch.sudoku.view.SudokuView;
 import sun.jvm.hotspot.HelloWorld;
 
@@ -9,6 +12,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.Document;
+import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -54,42 +58,68 @@ public class SudokuController
         @Override
         public void insertUpdate(DocumentEvent e)
         {
-//            System.out.println("public void insertUpdate(DocumentEvent e)" + e.hashCode());
         }
 
         @Override
         public void removeUpdate(DocumentEvent e)
         {
-            System.out.println("public void removeUpdate(DocumentEvent e)");
         }
 
         @Override
         public void changedUpdate(DocumentEvent e)
         {
-            System.out.println("public void changedUpdate(DocumentEvent e)");
         }
 
         @Override
         public void focusGained(FocusEvent e)
         {
-            System.out.println("     public void focusGained(FocusEvent e)");
         }
 
         @Override
         public void focusLost(FocusEvent e)
         {
-//            System.out.println("        public void focusLost(FocusEvent e)");
-            JTextField a = (JTextField) e.getSource();
+            JTextField tf = (NumberField) e.getSource();
+
+            Checker.check_input(tf);
+            if(tf.isEditable())
+                Checker.check_box(tf);
+        }
+    }
+
+    private static class Checker
+    {
+        public static void check_input(JTextField tf)
+        {
+
             String[] numbers = {"","0","1","2","3","4","5","6","7","8","9"};
-            if(!Arrays.asList(numbers).contains(a.getText()))
+            if(!Arrays.asList(numbers).contains(tf.getText()))
             {
-                a.setText("");
+                tf.setText("");
                 JOptionPane.showMessageDialog(null, "Insert number from 0-9");
-                a.requestFocus();
+                tf.requestFocus();
             }
+        }
 
+        public static void check_box(JTextField tf)
+        {
+            NumberBox nm = (NumberBox) tf.getParent();
 
+            NumberField[][]  nf = nm.getNf();
 
+            for (NumberField[] row : nf)
+            {
+                for (NumberField x: row)
+                {
+                    System.out.printf("%2s",x.getText());
+                    if(tf.getText().equals(x.getText()) && !tf.getText().equals("") && !tf.equals(x))
+                    {
+                        tf.setText("");
+                        JOptionPane.showMessageDialog(null, "There is this same number in box");
+                        tf.requestFocus();
+                    }
+                }
+                System.out.println();
+            }
         }
 
     }

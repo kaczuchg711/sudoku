@@ -4,7 +4,9 @@ import javax.swing.*;
 
 public class NumberField extends JTextField
 {
-    public NumberField()
+    NumberBox parrent;
+
+    public NumberField(NumberBox nb)
     {
         super();
         this.setHorizontalAlignment(SwingConstants.CENTER);
@@ -15,4 +17,9 @@ public class NumberField extends JTextField
         this.setEditable(false);
         setText(Integer.toString(number));
     }
+
+//    public NumberBox getParrent()
+//    {
+//        return parrent;
+//    }
 }

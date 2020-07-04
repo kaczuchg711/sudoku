@@ -3,9 +3,10 @@ package pl.c0.kaczuch.sudoku.view;
 import javax.swing.*;
 import java.awt.*;
 
-class NumberBox extends JComponent
+public class NumberBox extends JComponent
 {
     NumberField[][] nf;
+
 
     public NumberBox(int rows, int cols)
     {
@@ -17,7 +18,7 @@ class NumberBox extends JComponent
         {
             for (int j = 0; j < cols; j++)
             {
-                nf[i][j] = new NumberField();
+                nf[i][j] = new NumberField(this);
                 this.add(nf[i][j]);
             }
         }

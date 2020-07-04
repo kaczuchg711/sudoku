@@ -4,12 +4,14 @@ import pl.c0.kaczuch.sudoku.model.SudokuModel;
 import pl.c0.kaczuch.sudoku.view.SudokuView;
 import sun.jvm.hotspot.HelloWorld;
 
+import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.text.AbstractDocument;
 import javax.swing.text.Document;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class SudokuController
@@ -52,7 +54,7 @@ public class SudokuController
         @Override
         public void insertUpdate(DocumentEvent e)
         {
-            System.out.println("public void insertUpdate(DocumentEvent e)" + e.hashCode());
+//            System.out.println("public void insertUpdate(DocumentEvent e)" + e.hashCode());
         }
 
         @Override
@@ -76,8 +78,20 @@ public class SudokuController
         @Override
         public void focusLost(FocusEvent e)
         {
-            System.out.println("        public void focusLost(FocusEvent e)");
+//            System.out.println("        public void focusLost(FocusEvent e)");
+            JTextField a = (JTextField) e.getSource();
+            String[] numbers = {"","0","1","2","3","4","5","6","7","8","9"};
+            if(!Arrays.asList(numbers).contains(a.getText()))
+            {
+                a.setText("");
+                JOptionPane.showMessageDialog(null, "Insert number from 0-9");
+                a.requestFocus();
+            }
+
+
+
         }
+
     }
 
 }

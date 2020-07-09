@@ -18,7 +18,7 @@ public class BoardPanel extends JPanel
         {
             for (int j = 0; j < cols; j++)
             {
-                this.numberBoxes[i][j] = new NumberBox(3, 3);
+                this.numberBoxes[i][j] = new NumberBox(3, 3, i, j);
                 this.add(this.numberBoxes[i][j]);
             }
         }
@@ -27,6 +27,11 @@ public class BoardPanel extends JPanel
     public NumberBox[][] getNumberBoxes()
     {
         return numberBoxes;
+    }
+
+    public void setNumberBoxes(NumberBox[][] numberBoxes)
+    {
+        this.numberBoxes = numberBoxes;
     }
 }
 

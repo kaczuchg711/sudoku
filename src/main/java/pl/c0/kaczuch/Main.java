@@ -10,6 +10,6 @@ public class Main
     {
         SudokuView sv = new SudokuView();
         SudokuModel sm = new SudokuModel();
-        SudokuController sc = new SudokuController(sm,sv);
+        new SudokuController(sm,sv);
     }
 }

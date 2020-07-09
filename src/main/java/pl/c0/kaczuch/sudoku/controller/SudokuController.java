@@ -74,8 +74,12 @@ public class SudokuController
             JTextField tf = (NumberField) e.getSource();
 
             Checker.check_input(tf);
-            if(tf.isEditable())
+            if (tf.isEditable())
+            {
                 Checker.check_box(tf);
+
+                Checker.check_row((NumberField) tf);
+            }
         }
     }
 

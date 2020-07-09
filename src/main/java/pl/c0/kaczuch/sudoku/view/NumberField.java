@@ -1,28 +1,27 @@
 package pl.c0.kaczuch.sudoku.view;
 
 import javax.swing.*;
+import java.util.Objects;
 
 public class NumberField extends JTextField
 {
-    final int x;
-    final int y;
+    final int xx;
+    final int yy;
 
-
-
-    public NumberField(int nr,int x,int y)
+    public NumberField(int nr, int xx, int yy)
     {
         super();
-        this.x = x;
-        this.y = y;
+        this.xx = xx;
+        this.yy = yy;
         this.setHorizontalAlignment(SwingConstants.CENTER);
         this.setText(Integer.toString(nr));
     }
 
-    public NumberField(int x,int y)
+    public NumberField(int xx, int yy)
     {
         super();
-        this.x = x;
-        this.y = y;
+        this.xx = xx;
+        this.yy = yy;
         this.setHorizontalAlignment(SwingConstants.CENTER);
     }
 
@@ -32,5 +31,27 @@ public class NumberField extends JTextField
         setText(Integer.toString(number));
     }
 
+    public int getXX()
+    {
+        return xx;
+    }
 
+    public int getYY()
+    {
+        return yy;
+    }
+
+    public int getValue()
+    {
+        int res;
+        try
+        {
+            res = Integer.parseInt(this.getText());
+        }
+        catch (NumberFormatException e)
+        {
+            res = 0;
+        }
+        return res;
+    }
 }

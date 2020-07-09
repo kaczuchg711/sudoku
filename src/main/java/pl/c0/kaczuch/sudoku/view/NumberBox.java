@@ -2,17 +2,19 @@ package pl.c0.kaczuch.sudoku.view;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Arrays;
+import java.util.Objects;
 
 public class NumberBox extends JComponent
 {
     NumberField[][] nf;
-    final int x;
-    final int y;
+    final int xx;
+    final int yy;
 
-    public NumberBox(int rows, int cols, int x, int y)
+    public NumberBox(int rows, int cols, int xx, int yy)
     {
-        this.x = x;
-        this.y = y;
+        this.xx = xx;
+        this.yy = yy;
         this.setLayout(new GridLayout(rows, cols,1,1));
         this.setBackground(Color.BLACK);
         nf = new NumberField[rows][cols];
@@ -27,18 +29,33 @@ public class NumberBox extends JComponent
         }
     }
 
-    public int getX()
+    public int getXX()
     {
-        return x;
+        return xx;
     }
 
-    public int getY()
+    public int getYY()
     {
-        return y;
+        return yy;
     }
 
     public NumberField[][] getNf()
     {
         return nf;
     }
+
+    public void showNumberField()
+    {
+        for (int i = 0; i < nf.length; i++)
+        {
+            for (int j = 0; j < nf.length; j++)
+            {
+                System.out.printf("|%3s|",this.nf[i][j].getText());
+            }
+            System.out.println();
+        }
+        System.out.println();
+    }
+
+
 }

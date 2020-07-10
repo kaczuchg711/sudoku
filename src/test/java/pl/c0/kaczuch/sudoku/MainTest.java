@@ -61,7 +61,6 @@ public class MainTest
 
         @Test
         void check_box_Test()
-
         {
             NumberBox nb = new NumberBox(3, 3, 0, 0);
             NumberField[][] nft = nb.getNf();
@@ -93,40 +92,45 @@ public class MainTest
         @Test
         void check_line_in_row_Test()
         {
-            BoardPanel bp = new BoardPanel(3, 3);
-            NumberBox[][] nbt = bp.getNumberBoxes();
+            SudokuView sv = new SudokuView();
+            SudokuModel sm = new SudokuModel();
 
-            NumberField[][][] nft = new NumberField[3][3][3];
-            nft[0] = nbt[0][0].getNf();
-            nft[1] = nbt[0][1].getNf();
-            nft[2] = nbt[0][2].getNf();
+            int[][] numbers;
+            numbers = sm.get_numbers_from_file();
+            sv.genNumbers(numbers);
+            NumberField testedNumberField = sv.getBoardPanel().getNumberBoxes()[2][0].getNf()[0][0];
 
-            nft[0][1][0].setNumber(5);
-            nft[0][1][1].setNumber(4);
-            nft[1][1][1].setNumber(3);
-            nft[1][1][2].setNumber(7);
-            nft[2][1][0].setNumber(1);
-            nft[2][1][1].setNumber(2);
-            nft[2][1][2].setNumber(6);
-
-            NumberField tf = nft[1][1][0];
-            tf.setText("4");
+            testedNumberField.setText("9");
             String expected = "";
+            Checker.check_row(testedNumberField);
 
-            Checker.check_row(tf);
+            assertEquals(expected, testedNumberField.getText(), "should write " + '"' + expected + '"');
 
-            assertEquals(expected, tf.getText(), "should write " + '"'+expected+'"');
 
-            tf = nft[1][1][0];
-            tf.setText("8");
-            expected = "8";
+            testedNumberField = sv.getBoardPanel().getNumberBoxes()[2][0].getNf()[0][0];
+            testedNumberField.setText("4");
+            expected = "";
+            Checker.check_row(testedNumberField);
 
-            Checker.check_row(tf);
+            assertEquals(expected, testedNumberField.getText(), "should write " + '"' + expected + '"');
 
-            assertEquals(expected, tf.getText(), "should write " + expected);
+
+            testedNumberField = sv.getBoardPanel().getNumberBoxes()[1][2].getNf()[0][2];
+            testedNumberField.setText("9");
+            expected = "";
+            Checker.check_row(testedNumberField);
+
+            assertEquals(expected, testedNumberField.getText(), "should write " + '"' + expected + '"');
+
+            testedNumberField = sv.getBoardPanel().getNumberBoxes()[0][1].getNf()[0][0];
+            testedNumberField.setText("4");
+            expected = "4";
+            Checker.check_row(testedNumberField);
+
+            assertEquals(expected, testedNumberField.getText(), "should write " + '"' + expected + '"');
+
 
         }
-
 
         @Test
         void check_line_in_column_Test()

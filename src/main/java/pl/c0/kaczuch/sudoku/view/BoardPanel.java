@@ -43,7 +43,6 @@ public class BoardPanel extends JPanel
                 y.showNumberField();
             }
         }
-        ;
     }
 }
 

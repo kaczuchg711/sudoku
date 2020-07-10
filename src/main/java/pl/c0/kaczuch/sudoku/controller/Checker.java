@@ -81,26 +81,35 @@ public class Checker
                 nbtInLine[2] = parentNumberBox;
                 break;
         }
+
+        NumberField temp;
+        String text;
+
+
         for (int h = 0; h < 3; h++)
         {
             for (int i = 0; i < 3; i++)
             {
-                for (int j = 0; j < 3; j++)
+
+                temp = nbtInLine[h].getNf()[testedNumberField.getXX()][i];
+                if (!temp.getText().equals("")
+                        && temp.getText().equals(testedNumberField.getText())
+                        && temp != testedNumberField)
                 {
-                    if (!nbtInLine[h].getNf()[i][j].getText().equals("") && nbtInLine[h].getNf()[i][j].getText().equals(testedNumberField.getText()) && nbtInLine[h].getNf()[i][j] != testedNumberField)
                     {
                         testedNumberField.setText("");
-                        JOptionPane.showMessageDialog(null, "There is his same number in row");
+                        JOptionPane.showMessageDialog(null, "There is this same number in row");
                         testedNumberField.requestFocus();
 
                         return false;
                     }
                 }
+
             }
+
 
         }
         return true;
-
     }
 
     public static boolean check_column(NumberField testedNumberField)
@@ -142,14 +151,13 @@ public class Checker
             {
                 temp = nbtInLine[h].getNf()[j][numberFieldY];
 
-                String s = temp.getText();
 
                 if (!temp.getText().equals("")
                         && temp.getText().equals(testedNumberField.getText())
                         && temp != testedNumberField)
                 {
                     testedNumberField.setText("");
-                    JOptionPane.showMessageDialog(null, "There is his same number in column");
+                    JOptionPane.showMessageDialog(null, "There is this same number in column");
                     testedNumberField.requestFocus();
                     return false;
                 }

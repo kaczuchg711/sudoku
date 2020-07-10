@@ -31,7 +31,7 @@ public class SudokuView extends JFrame
 
         this.add(this.boardPanel);
         this.add(this.buttonPanel);
-        this.setVisible(true);
+
         this.pack();
     }
 

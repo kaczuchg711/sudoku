@@ -5,9 +5,12 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import pl.c0.kaczuch.sudoku.controller.Checker;
+import pl.c0.kaczuch.sudoku.controller.SudokuController;
+import pl.c0.kaczuch.sudoku.model.SudokuModel;
 import pl.c0.kaczuch.sudoku.view.BoardPanel;
 import pl.c0.kaczuch.sudoku.view.NumberBox;
 import pl.c0.kaczuch.sudoku.view.NumberField;
+import pl.c0.kaczuch.sudoku.view.SudokuView;
 
 
 import javax.swing.JTextField;
@@ -58,6 +61,7 @@ public class MainTest
 
         @Test
         void check_box_Test()
+
         {
             NumberBox nb = new NumberBox(3, 3, 0, 0);
             NumberField[][] nft = nb.getNf();
@@ -85,8 +89,9 @@ public class MainTest
             assertEquals(expected, tf.getText(), "should change on " + expected);
         }
 
+        @Disabled
         @Test
-        void check_line_horizontally_Test()
+        void check_line_in_row_Test()
         {
             BoardPanel bp = new BoardPanel(3, 3);
             NumberBox[][] nbt = bp.getNumberBoxes();
@@ -119,6 +124,48 @@ public class MainTest
             Checker.check_row(tf);
 
             assertEquals(expected, tf.getText(), "should write " + expected);
+
+        }
+
+
+        @Test
+        void check_line_in_column_Test()
+        {
+            SudokuView sv = new SudokuView();
+            SudokuModel sm = new SudokuModel();
+
+            int[][] numbers;
+            numbers = sm.get_numbers_from_file();
+            sv.genNumbers(numbers);
+            NumberField testedNumberField = sv.getBoardPanel().getNumberBoxes()[2][0].getNf()[0][0];
+
+            testedNumberField.setText("2");
+            String expected = "";
+            Checker.check_column(testedNumberField);
+
+            assertEquals(expected, testedNumberField.getText(), "should write " + '"' + expected + '"');
+
+            testedNumberField = sv.getBoardPanel().getNumberBoxes()[1][1].getNf()[0][1];
+            testedNumberField.setText("3");
+            expected = "";
+            Checker.check_column(testedNumberField);
+
+            assertEquals(expected, testedNumberField.getText(), "should write " + '"' + expected + '"');
+
+
+            testedNumberField = sv.getBoardPanel().getNumberBoxes()[0][1].getNf()[0][1];
+            testedNumberField.setText("8");
+            expected = "";
+            Checker.check_column(testedNumberField);
+
+            assertEquals(expected, testedNumberField.getText(), "should write " + '"' + expected + '"');
+
+            testedNumberField = sv.getBoardPanel().getNumberBoxes()[0][0].getNf()[0][1];
+            testedNumberField.setText("6");
+            expected = "6";
+            Checker.check_column(testedNumberField);
+
+            assertEquals(expected, testedNumberField.getText(), "should write " + '"' + expected + '"');
 
         }
     }

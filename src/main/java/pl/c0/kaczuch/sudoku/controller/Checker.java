@@ -11,7 +11,7 @@ import java.util.Arrays;
 
 public class Checker
 {
-    public static void check_input(JTextField tf)
+    public static boolean check_input(JTextField tf)
     {
         String[] numbers = {"", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
         if (!Arrays.asList(numbers).contains(tf.getText()))
@@ -19,10 +19,13 @@ public class Checker
             tf.setText("");
             JOptionPane.showMessageDialog(null, "Insert number from 0-9");
             tf.requestFocus();
+            return false;
         }
+
+        return true;
     }
 
-    public static void check_box(JTextField tf)
+    public static boolean check_box(JTextField tf)
     {
         NumberBox nm = (NumberBox) tf.getParent();
 
@@ -35,14 +38,19 @@ public class Checker
                 if (tf.getText().equals(x.getText()) && !tf.getText().equals("") && !tf.equals(x))
                 {
                     tf.setText("");
+
                     JOptionPane.showMessageDialog(null, "There is his same number in box");
+
                     tf.requestFocus();
+
+                    return false;
                 }
             }
         }
+        return true;
     }
 
-    public static void check_row(NumberField testedNumberField)
+    public static boolean check_row(NumberField testedNumberField)
     {
 
         NumberBox parentNumberBox = (NumberBox) testedNumberField.getParent();
@@ -79,18 +87,75 @@ public class Checker
             {
                 for (int j = 0; j < 3; j++)
                 {
-                    if (!nbtInLine[h].getNf()[i][j].getText().equals("")&& nbtInLine[h].getNf()[i][j].getText().equals(testedNumberField.getText()) && nbtInLine[h].getNf()[i][j] != testedNumberField)
+                    if (!nbtInLine[h].getNf()[i][j].getText().equals("") && nbtInLine[h].getNf()[i][j].getText().equals(testedNumberField.getText()) && nbtInLine[h].getNf()[i][j] != testedNumberField)
                     {
                         testedNumberField.setText("");
                         JOptionPane.showMessageDialog(null, "There is his same number in row");
                         testedNumberField.requestFocus();
+
+                        return false;
                     }
                 }
             }
 
         }
+        return true;
 
+    }
 
+    public static boolean check_column(NumberField testedNumberField)
+    {
+        NumberBox parentNumberBox = (NumberBox) testedNumberField.getParent();
+        BoardPanel bp = (BoardPanel) parentNumberBox.getParent();
+        bp.getX();
+        int x = parentNumberBox.getXX();
+        int y = parentNumberBox.getYY();
+        int numberFieldY = testedNumberField.getYY();
+
+        NumberBox[][] nbt = bp.getNumberBoxes();
+
+        NumberBox[] nbtInLine = new NumberBox[3];
+
+        switch (x)
+        {
+            case 0:
+                nbtInLine[0] = parentNumberBox;
+                nbtInLine[1] = nbt[1][y];
+                nbtInLine[2] = nbt[2][y];
+                break;
+            case 1:
+                nbtInLine[0] = nbt[0][y];
+                nbtInLine[1] = parentNumberBox;
+                nbtInLine[2] = nbt[2][y];
+                break;
+            case 2:
+                nbtInLine[0] = nbt[0][y];
+                nbtInLine[1] = nbt[1][y];
+                nbtInLine[2] = parentNumberBox;
+                break;
+        }
+
+        NumberField temp;
+        for (int h = 0; h < 3; h++)
+        {
+            for (int j = 0; j < 3; j++)
+            {
+                temp = nbtInLine[h].getNf()[j][numberFieldY];
+
+                String s = temp.getText();
+
+                if (!temp.getText().equals("")
+                        && temp.getText().equals(testedNumberField.getText())
+                        && temp != testedNumberField)
+                {
+                    testedNumberField.setText("");
+                    JOptionPane.showMessageDialog(null, "There is his same number in column");
+                    testedNumberField.requestFocus();
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
 

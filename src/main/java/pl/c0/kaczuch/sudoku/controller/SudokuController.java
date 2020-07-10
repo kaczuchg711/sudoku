@@ -4,11 +4,9 @@ import pl.c0.kaczuch.sudoku.model.SudokuModel;
 import pl.c0.kaczuch.sudoku.view.NumberField;
 import pl.c0.kaczuch.sudoku.view.SudokuView;
 
-import javax.swing.*;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 
-import java.awt.*;
 import java.awt.event.*;
 
 public class SudokuController
@@ -71,14 +69,25 @@ public class SudokuController
         @Override
         public void focusLost(FocusEvent e)
         {
-            JTextField tf = (NumberField) e.getSource();
+            NumberField tf = (NumberField) e.getSource();
 
             Checker.check_input(tf);
             if (tf.isEditable())
             {
+//                if (Checker.check_box(tf))
+//                {}
+//                else if (Checker.check_row(tf))
+//                {}
+//                else if (Checker.check_column(tf))
+//                {}
+
                 Checker.check_box(tf);
 
-                Checker.check_row((NumberField) tf);
+                Checker.check_row(tf);
+
+                Checker.check_column(tf);
+
+
             }
         }
     }

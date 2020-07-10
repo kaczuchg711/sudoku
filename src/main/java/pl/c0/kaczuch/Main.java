@@ -10,6 +10,8 @@ public class Main
     {
         SudokuView sv = new SudokuView();
         SudokuModel sm = new SudokuModel();
+        sv.setVisible(true);
         new SudokuController(sm,sv);
+
     }
 }

@@ -88,7 +88,6 @@ public class MainTest
             assertEquals(expected, tf.getText(), "should change on " + expected);
         }
 
-        @Disabled
         @Test
         void check_line_in_row_Test()
         {
@@ -115,7 +114,7 @@ public class MainTest
             assertEquals(expected, testedNumberField.getText(), "should write " + '"' + expected + '"');
 
 
-            testedNumberField = sv.getBoardPanel().getNumberBoxes()[1][2].getNf()[0][2];
+            testedNumberField = sv.getBoardPanel().getNumberBoxes()[1][2].getNf()[1][2];
             testedNumberField.setText("9");
             expected = "";
             Checker.check_row(testedNumberField);

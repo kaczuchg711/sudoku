@@ -19,7 +19,7 @@ public class SudokuView extends JFrame
 
     public SudokuView()
     {
-        this.buttonPanel = new ButtonPanel("gen", "cos1", "cos2");
+        this.buttonPanel = new ButtonPanel(make_vertical("START"));
         this.boardPanel = new BoardPanel(3, 3);
 
         this.setLayout(new GridLayout(1, 2));
@@ -29,6 +29,7 @@ public class SudokuView extends JFrame
         this.setTitle("Sudoku");
         this.getContentPane().setBackground(new Color(255, 0, 0));
 
+
         this.add(this.boardPanel);
         this.add(this.buttonPanel);
 
@@ -37,7 +38,7 @@ public class SudokuView extends JFrame
 
     public void addStatementListener(ActionListener listenForGen)
     {
-        this.getButtonPanel().getButton("gen").addActionListener(listenForGen);
+        this.getButtonPanel().getButtons()[0].addActionListener(listenForGen);
     }
 
     public void addNumberInListener(EventListener[][] lisnerForNF)
@@ -74,5 +75,19 @@ public class SudokuView extends JFrame
                         this.boardPanel.getNumberBoxes()[i][j].getNf()[ii][jj].setNumber(numbers[ii + i * 3][jj + j * 3]);
                     }
     }
+
+    public static String make_vertical(String s)
+    {
+        StringBuilder sb = new StringBuilder("<html></html>");
+        int i = 6;
+        for (char c: s.toCharArray())
+        {
+            sb.insert(i,c + "<br>");
+            i+=5;
+        }
+
+        return sb.toString();
+    }
+
 
 }

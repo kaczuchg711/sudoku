@@ -74,20 +74,11 @@ public class SudokuController
             Checker.check_input(tf);
             if (tf.isEditable())
             {
-//                if (Checker.check_box(tf))
-//                {}
-//                else if (Checker.check_row(tf))
-//                {}
-//                else if (Checker.check_column(tf))
-//                {}
-
                 Checker.check_box(tf);
 
                 Checker.check_row(tf);
 
                 Checker.check_column(tf);
-
-
             }
         }
     }

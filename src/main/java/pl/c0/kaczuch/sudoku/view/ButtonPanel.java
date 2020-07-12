@@ -18,7 +18,7 @@ public class ButtonPanel extends JPanel
 
         this.setLayout(new GridLayout(n, 1));
 
-        setMinimumSize(new Dimension(WIDTH, HEIGHT));
+        setMinimumSize(new Dimension(10, HEIGHT));
 
         for (JButton a : buttons)
         {
@@ -33,6 +33,7 @@ public class ButtonPanel extends JPanel
 
         for (int i = 0; i < texts.length; i++)
             this.buttons[i] = new JButton(texts[i]);
+
 
         this.setLayout(new GridLayout(texts.length, 1));
 
@@ -64,5 +65,10 @@ public class ButtonPanel extends JPanel
         }
 
         return null;
+    }
+
+    public JButton[] getButtons()
+    {
+        return buttons;
     }
 }

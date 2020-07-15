@@ -1,4 +1,4 @@
-package pl.c0.kaczuch.sudoku.controller;
+package pl.c0.kaczuch.sudoku.model;
 
 import pl.c0.kaczuch.sudoku.view.BoardPanel;
 import pl.c0.kaczuch.sudoku.view.NumberBox;

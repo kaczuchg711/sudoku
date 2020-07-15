@@ -1,11 +1,10 @@
 package pl.c0.kaczuch.sudoku.controller;
 
+import pl.c0.kaczuch.sudoku.model.Checker;
 import pl.c0.kaczuch.sudoku.model.SudokuModel;
 import pl.c0.kaczuch.sudoku.view.NumberField;
 import pl.c0.kaczuch.sudoku.view.SudokuView;
 
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 
 import java.awt.event.*;
 
@@ -39,28 +38,13 @@ public class SudokuController
         public void actionPerformed(ActionEvent e)
         {
             int[][] numbers;
-            numbers = model.get_numbers_from_file();
-            view.genNumbers(numbers);
+            numbers = model.create_sudoku();
+            view.setNumbers(numbers);
         }
     }
 
-    private class CheckListener implements DocumentListener, FocusListener
+    private class CheckListener implements  FocusListener
     {
-        @Override
-        public void insertUpdate(DocumentEvent e)
-        {
-        }
-
-        @Override
-        public void removeUpdate(DocumentEvent e)
-        {
-        }
-
-        @Override
-        public void changedUpdate(DocumentEvent e)
-        {
-        }
-
         @Override
         public void focusGained(FocusEvent e)
         {

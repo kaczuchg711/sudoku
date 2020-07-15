@@ -4,10 +4,8 @@ package pl.c0.kaczuch.sudoku;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import pl.c0.kaczuch.sudoku.controller.Checker;
-import pl.c0.kaczuch.sudoku.controller.SudokuController;
+import pl.c0.kaczuch.sudoku.model.Checker;
 import pl.c0.kaczuch.sudoku.model.SudokuModel;
-import pl.c0.kaczuch.sudoku.view.BoardPanel;
 import pl.c0.kaczuch.sudoku.view.NumberBox;
 import pl.c0.kaczuch.sudoku.view.NumberField;
 import pl.c0.kaczuch.sudoku.view.SudokuView;
@@ -27,36 +25,17 @@ public class MainTest
         @Test
         void check_input_Test()
         {
-            JTextField tf = new JTextField("4");
-            String expected = "4";
+            JTextField tf = new JTextField();
+            String[] input = {"4", "0", "9", "10", "abc"};
+            String[] expected = {"4", "0", "9", "", ""};
 
-            Checker.check_input(tf);
-            assertEquals(expected, tf.getText(), "should write " + expected);
 
-            tf.setText("0");
-            expected = "0";
-
-            Checker.check_input(tf);
-            assertEquals(expected, tf.getText(), "should write " + expected);
-
-            tf.setText("9");
-            expected = "9";
-
-            Checker.check_input(tf);
-            assertEquals(expected, tf.getText(), "should write " + expected);
-
-            tf.setText("10");
-            expected = "";
-
-            Checker.check_input(tf);
-            assertEquals(expected, tf.getText(), "should write " + expected);
-
-            tf.setText("abc");
-            expected = "";
-
-            Checker.check_input(tf);
-            assertEquals(expected, tf.getText(), "should write " + expected);
-
+            for (int i = 0; i < expected.length; i++)
+            {
+                tf.setText(input[i]);
+                Checker.check_input(tf);
+                assertEquals(expected[i], tf.getText(), "should write " + expected);
+            }
         }
 
         @Test
@@ -94,40 +73,33 @@ public class MainTest
             SudokuView sv = new SudokuView();
             SudokuModel sm = new SudokuModel();
 
-            int[][] numbers;
-            numbers = sm.get_numbers_from_file();
-            sv.genNumbers(numbers);
-            NumberField testedNumberField = sv.getBoardPanel().getNumberBoxes()[2][0].getNf()[0][0];
 
-            testedNumberField.setText("9");
-            String expected = "";
-            Checker.check_row(testedNumberField);
+            sv.setNumbers(sm.create_sudoku());
+            NumberField testedNumberField;
 
-            assertEquals(expected, testedNumberField.getText(), "should write " + '"' + expected + '"');
+            int[][] numberBoxesCor = {
+                    {2, 0},
+                    {2, 0},
+                    {1, 2},
+                    {0, 1},
+            };
+            int[][] numberNumberFieldsCor = {
+                    {0, 0},
+                    {0, 0},
+                    {1, 2},
+                    {0, 0},
+            };
 
+            String[] inputs = {"9", "4", "9", "4"};
+            String[] expected = {"", "", "", "4"};
 
-            testedNumberField = sv.getBoardPanel().getNumberBoxes()[2][0].getNf()[0][0];
-            testedNumberField.setText("4");
-            expected = "";
-            Checker.check_row(testedNumberField);
-
-            assertEquals(expected, testedNumberField.getText(), "should write " + '"' + expected + '"');
-
-
-            testedNumberField = sv.getBoardPanel().getNumberBoxes()[1][2].getNf()[1][2];
-            testedNumberField.setText("9");
-            expected = "";
-            Checker.check_row(testedNumberField);
-
-            assertEquals(expected, testedNumberField.getText(), "should write " + '"' + expected + '"');
-
-            testedNumberField = sv.getBoardPanel().getNumberBoxes()[0][1].getNf()[0][0];
-            testedNumberField.setText("4");
-            expected = "4";
-            Checker.check_row(testedNumberField);
-
-            assertEquals(expected, testedNumberField.getText(), "should write " + '"' + expected + '"');
-
+            for (int i = 0; i < inputs.length; i++)
+            {
+                testedNumberField = sv.getBoardPanel().getNumberBoxes()[numberBoxesCor[i][0]][numberBoxesCor[i][1]].getNf()[numberNumberFieldsCor[i][0]][numberNumberFieldsCor[i][1]];
+                testedNumberField.setText(inputs[i]);
+                Checker.check_row(testedNumberField);
+                assertEquals(expected[i], testedNumberField.getText(), "should write " + '"' + expected[i] + '"');
+            }
 
         }
 
@@ -136,40 +108,34 @@ public class MainTest
         {
             SudokuView sv = new SudokuView();
             SudokuModel sm = new SudokuModel();
+            NumberField testedNumberField;
 
-            int[][] numbers;
-            numbers = sm.get_numbers_from_file();
-            sv.genNumbers(numbers);
-            NumberField testedNumberField = sv.getBoardPanel().getNumberBoxes()[2][0].getNf()[0][0];
+            sv.setNumbers(sm.create_sudoku());
 
-            testedNumberField.setText("2");
-            String expected = "";
-            Checker.check_column(testedNumberField);
+            int[][] numberBoxesCor = {
+                    {2, 0},
+                    {2, 0},
+                    {1, 2},
+                    {0, 1},
+            };
+            int[][] numberNumberFieldsCor = {
+                    {0, 0},
+                    {0, 0},
+                    {1, 2},
+                    {0, 1},
+            };
 
-            assertEquals(expected, testedNumberField.getText(), "should write " + '"' + expected + '"');
-
-            testedNumberField = sv.getBoardPanel().getNumberBoxes()[1][1].getNf()[0][1];
-            testedNumberField.setText("3");
-            expected = "";
-            Checker.check_column(testedNumberField);
-
-            assertEquals(expected, testedNumberField.getText(), "should write " + '"' + expected + '"');
+            String[] inputs = {"2", "3", "8", "1"};
+            String[] expected = {"", "", "", "1"};
 
 
-            testedNumberField = sv.getBoardPanel().getNumberBoxes()[0][1].getNf()[0][1];
-            testedNumberField.setText("8");
-            expected = "";
-            Checker.check_column(testedNumberField);
-
-            assertEquals(expected, testedNumberField.getText(), "should write " + '"' + expected + '"');
-
-            testedNumberField = sv.getBoardPanel().getNumberBoxes()[0][0].getNf()[0][1];
-            testedNumberField.setText("6");
-            expected = "6";
-            Checker.check_column(testedNumberField);
-
-            assertEquals(expected, testedNumberField.getText(), "should write " + '"' + expected + '"');
-
+            for (int i = 0; i < inputs.length; i++)
+            {
+                testedNumberField = sv.getBoardPanel().getNumberBoxes()[numberBoxesCor[i][0]][numberBoxesCor[i][1]].getNf()[numberNumberFieldsCor[i][0]][numberNumberFieldsCor[i][1]];
+                testedNumberField.setText(inputs[i]);
+                Checker.check_column(testedNumberField);
+                assertEquals(expected[i], testedNumberField.getText() , "should write " + '"' + expected[i] + '"');
+            }
         }
     }
 }

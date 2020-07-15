@@ -6,26 +6,21 @@ import java.util.Scanner;
 
 public class SudokuModel
 {
-    public int[][] get_numbers_from_file()
-    {
-        File f = new File(System.getProperty("user.dir") + "/src/main/java/pl/c0/kaczuch/sudoku/model/numbers.txt");
-        int[][] numbers = new int[9][9];
-        try
-        {
-            Scanner s = new Scanner(f);
-            for (int i = 0; i < 9; i++)
-            {
-                for (int j = 0; j < 9; j++)
-                {
-                    numbers[i][j] = s.nextInt();
-                }
-            }
-        }
-        catch (FileNotFoundException e)
-        {
-            e.printStackTrace();
-        }
 
+
+    public int[][] create_sudoku()
+    {
+        int[][] numbers = {
+                {3, 0, 1, 0, 0, 0, 7, 0, 5},
+                {5, 4, 0, 0, 3, 7, 1, 2, 6},
+                {0, 8, 2, 6, 5, 1, 4, 0, 3},
+                {2, 5, 0, 3, 0, 0, 6, 0, 0},
+                {4, 9, 0, 5, 7, 6, 0, 0, 0},
+                {0, 0, 6, 2, 8, 0, 5, 3, 0},
+                {0, 0, 0, 0, 9, 5, 0, 4, 8},
+                {0, 0, 0, 7, 0, 3, 9, 5, 1},
+                {0, 0, 5, 0, 2, 0, 0, 6, 0}
+        };
         return numbers;
     }
-}
+    }

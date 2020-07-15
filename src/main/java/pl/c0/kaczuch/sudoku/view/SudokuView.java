@@ -48,7 +48,6 @@ public class SudokuView extends JFrame
                 for (int k = 0; k < 3; k++)
                     for (int l = 0; l < 3; l++)
                     {
-                        this.boardPanel.getNumberBoxes()[i][j].getNf()[k][l].getDocument().addDocumentListener((DocumentListener) lisnerForNF[j + i * 3][l + k * 3]);
                         this.boardPanel.getNumberBoxes()[i][j].getNf()[k][l].addFocusListener((FocusListener) lisnerForNF[j + i * 3][l + k * 3]);
                     }
     }
@@ -63,7 +62,7 @@ public class SudokuView extends JFrame
         return boardPanel;
     }
 
-    public void genNumbers(int[][] numbers)
+    public void setNumbers(int[][] numbers)
     {
         for (int i = 0; i < 3; i++)
             for (int j = 0; j < 3; j++)

@@ -44,6 +44,8 @@ public class NumberBox extends JComponent
         return nf;
     }
 
+
+
     public void showNumberField()
     {
         for (int i = 0; i < nf.length; i++)

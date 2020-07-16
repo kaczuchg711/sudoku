@@ -7,6 +7,7 @@ import pl.c0.kaczuch.sudoku.view.SudokuView;
 
 
 import java.awt.event.*;
+import java.util.Arrays;
 
 public class SudokuController
 {
@@ -53,16 +54,22 @@ public class SudokuController
         @Override
         public void focusLost(FocusEvent e)
         {
-            NumberField tf = (NumberField) e.getSource();
+            NumberField numberField = (NumberField) e.getSource();
 
-            Checker.check_input(tf);
-            if (tf.isEditable())
+            Checker.check_input(numberField);
+            if (numberField.isEditable())
             {
-                Checker.check_box(tf);
+                if (!Checker.check_box(numberField))
+                {}
+                else if (!Checker.check_row(numberField))
+                {}
+                else if (!Checker.check_column(numberField))
+                {}
+                else
+                {
+                    model.update_model(numberField);
+                }
 
-                Checker.check_row(tf);
-
-                Checker.check_column(tf);
             }
         }
     }

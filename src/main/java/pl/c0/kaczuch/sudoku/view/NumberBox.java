@@ -2,57 +2,69 @@ package pl.c0.kaczuch.sudoku.view;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Arrays;
-import java.util.Objects;
 
 public class NumberBox extends JComponent
 {
-    NumberField[][] nf;
-    final int xx;
-    final int yy;
+    NumberField[][] numberFields;
+    final int xCorInBoard;
+    final int yCorInBoard;
 
-    public NumberBox(int rows, int cols, int xx, int yy)
+    public NumberBox(int rows, int cols, int xCorInBoard, int yCorInBoard)
     {
-        this.xx = xx;
-        this.yy = yy;
+        this.xCorInBoard = xCorInBoard;
+        this.yCorInBoard = yCorInBoard;
         this.setLayout(new GridLayout(rows, cols,1,1));
         this.setBackground(Color.BLACK);
-        nf = new NumberField[rows][cols];
+        numberFields = new NumberField[rows][cols];
 
         for (int i = 0; i < rows; i++)
         {
             for (int j = 0; j < cols; j++)
             {
-                nf[i][j] = new NumberField(i,j);
-                this.add(nf[i][j]);
+                numberFields[i][j] = new NumberField(i,j);
+                this.add(numberFields[i][j]);
             }
         }
     }
 
-    public int getXX()
+    public int getxCorInBoard()
     {
-        return xx;
+        return xCorInBoard;
     }
 
-    public int getYY()
+    public int getyCorInBoard()
     {
-        return yy;
+        return yCorInBoard;
     }
 
-    public NumberField[][] getNf()
+    public NumberField[][] getNumberFields()
     {
-        return nf;
+        return numberFields;
     }
 
+    public void setNumberFields(NumberField[][] numberFields)
+    {
+        this.numberFields = numberFields;
+    }
 
+    public void setNumberFields(int[][] numberFields)
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0; j < 3; j++)
+            {
+                this.numberFields[i][j].setNumber(numberFields[i][j]);
+            }
+        }
+    }
 
     public void showNumberField()
     {
-        for (int i = 0; i < nf.length; i++)
+        for (int i = 0; i < numberFields.length; i++)
         {
-            for (int j = 0; j < nf.length; j++)
+            for (int j = 0; j < numberFields.length; j++)
             {
-                System.out.printf("|%3s|",this.nf[i][j].getText());
+                System.out.printf("|%3s|",this.numberFields[i][j].getText());
             }
             System.out.println();
         }

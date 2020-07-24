@@ -1,12 +1,9 @@
 package pl.c0.kaczuch.sudoku.view;
 
 import javax.swing.*;
-import javax.swing.event.DocumentListener;
-import javax.swing.text.Document;
 import java.awt.*;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusListener;
-import java.util.ArrayList;
 import java.util.EventListener;
 
 public class SudokuView extends JFrame
@@ -48,7 +45,7 @@ public class SudokuView extends JFrame
                 for (int k = 0; k < 3; k++)
                     for (int l = 0; l < 3; l++)
                     {
-                        this.boardPanel.getNumberBoxes()[i][j].getNf()[k][l].addFocusListener((FocusListener) lisnerForNF[j + i * 3][l + k * 3]);
+                        this.boardPanel.getNumberBoxes()[i][j].getNumberFields()[k][l].addFocusListener((FocusListener) lisnerForNF[j + i * 3][l + k * 3]);
                     }
     }
 
@@ -71,7 +68,7 @@ public class SudokuView extends JFrame
                     {
                         if (numbers[ii + i * 3][jj + j * 3] == 0)
                             continue;
-                        this.boardPanel.getNumberBoxes()[i][j].getNf()[ii][jj].setNumber(numbers[ii + i * 3][jj + j * 3]);
+                        this.boardPanel.getNumberBoxes()[i][j].getNumberFields()[ii][jj].setNumber(numbers[ii + i * 3][jj + j * 3]);
                     }
     }
 

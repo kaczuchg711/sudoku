@@ -1,7 +1,6 @@
 package pl.c0.kaczuch.sudoku;
 
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import pl.c0.kaczuch.sudoku.model.Checker;
@@ -42,13 +41,16 @@ public class MainTest
         void check_box_Test()
         {
             NumberBox nb = new NumberBox(3, 3, 0, 0);
-            NumberField[][] nft = nb.getNf();
-            nft[0][0].setNumber(3);
-            nft[1][0].setNumber(3);
-            nft[1][1].setNumber(7);
-            nft[1][2].setNumber(6);
-            nft[2][0].setNumber(2);
-            nft[2][1].setNumber(8);
+
+            int[][] numbersForNumbersFields = {
+                    {0, 0, 0},
+                    {3, 7, 6},
+                    {2, 8, 0}
+            };
+
+            nb.setNumberFields(numbersForNumbersFields);
+
+            NumberField[][] nft = nb.getNumberFields();
 
             JTextField tf = nft[0][1];
 
@@ -95,7 +97,7 @@ public class MainTest
 
             for (int i = 0; i < inputs.length; i++)
             {
-                testedNumberField = sv.getBoardPanel().getNumberBoxes()[numberBoxesCor[i][0]][numberBoxesCor[i][1]].getNf()[numberNumberFieldsCor[i][0]][numberNumberFieldsCor[i][1]];
+                testedNumberField = sv.getBoardPanel().getNumberBoxes()[numberBoxesCor[i][0]][numberBoxesCor[i][1]].getNumberFields()[numberNumberFieldsCor[i][0]][numberNumberFieldsCor[i][1]];
                 testedNumberField.setText(inputs[i]);
                 Checker.check_row(testedNumberField);
                 assertEquals(expected[i], testedNumberField.getText(), "should write " + '"' + expected[i] + '"');
@@ -131,10 +133,10 @@ public class MainTest
 
             for (int i = 0; i < inputs.length; i++)
             {
-                testedNumberField = sv.getBoardPanel().getNumberBoxes()[numberBoxesCor[i][0]][numberBoxesCor[i][1]].getNf()[numberNumberFieldsCor[i][0]][numberNumberFieldsCor[i][1]];
+                testedNumberField = sv.getBoardPanel().getNumberBoxes()[numberBoxesCor[i][0]][numberBoxesCor[i][1]].getNumberFields()[numberNumberFieldsCor[i][0]][numberNumberFieldsCor[i][1]];
                 testedNumberField.setText(inputs[i]);
                 Checker.check_column(testedNumberField);
-                assertEquals(expected[i], testedNumberField.getText() , "should write " + '"' + expected[i] + '"');
+                assertEquals(expected[i], testedNumberField.getText(), "should write " + '"' + expected[i] + '"');
             }
         }
     }

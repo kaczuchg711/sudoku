@@ -6,7 +6,6 @@ import pl.c0.kaczuch.sudoku.view.NumberField;
 
 import javax.swing.*;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Checker
@@ -29,7 +28,7 @@ public class Checker
     {
         NumberBox nm = (NumberBox) tf.getParent();
 
-        NumberField[][] nf = nm.getNf();
+        NumberField[][] nf = nm.getNumberFields();
 
         for (NumberField[] row : nf)
         {
@@ -56,8 +55,8 @@ public class Checker
         NumberBox parentNumberBox = (NumberBox) testedNumberField.getParent();
         BoardPanel bp = (BoardPanel) parentNumberBox.getParent();
         bp.getX();
-        int x = parentNumberBox.getXX();
-        int y = parentNumberBox.getYY();
+        int x = parentNumberBox.getxCorInBoard();
+        int y = parentNumberBox.getyCorInBoard();
 
         NumberBox[][] nbt = bp.getNumberBoxes();
 
@@ -91,7 +90,7 @@ public class Checker
             for (int i = 0; i < 3; i++)
             {
 
-                temp = nbtInLine[h].getNf()[testedNumberField.getXX()][i];
+                temp = nbtInLine[h].getNumberFields()[testedNumberField.getxCorInBox()][i];
                 if (!temp.getText().equals("")
                         && temp.getText().equals(testedNumberField.getText())
                         && temp != testedNumberField)
@@ -117,9 +116,9 @@ public class Checker
         NumberBox parentNumberBox = (NumberBox) testedNumberField.getParent();
         BoardPanel bp = (BoardPanel) parentNumberBox.getParent();
         bp.getX();
-        int x = parentNumberBox.getXX();
-        int y = parentNumberBox.getYY();
-        int numberFieldY = testedNumberField.getYY();
+        int x = parentNumberBox.getxCorInBoard();
+        int y = parentNumberBox.getyCorInBoard();
+        int numberFieldY = testedNumberField.getyCorInBox();
 
         NumberBox[][] nbt = bp.getNumberBoxes();
 
@@ -149,7 +148,7 @@ public class Checker
         {
             for (int j = 0; j < 3; j++)
             {
-                temp = nbtInLine[h].getNf()[j][numberFieldY];
+                temp = nbtInLine[h].getNumberFields()[j][numberFieldY];
 
 
                 if (!temp.getText().equals("")

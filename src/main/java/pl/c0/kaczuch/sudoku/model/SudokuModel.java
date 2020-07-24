@@ -1,13 +1,7 @@
 package pl.c0.kaczuch.sudoku.model;
 
-import pl.c0.kaczuch.sudoku.view.BoardPanel;
 import pl.c0.kaczuch.sudoku.view.NumberBox;
 import pl.c0.kaczuch.sudoku.view.NumberField;
-import pl.c0.kaczuch.sudoku.view.SudokuView;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.Scanner;
 
 public class SudokuModel
 {
@@ -36,11 +30,11 @@ public class SudokuModel
     {
         NumberBox parentNumberBox = (NumberBox) numberField.getParent();
 
-        int parenX = parentNumberBox.getXX();
-        int parenY = parentNumberBox.getYY();
+        int parenX = parentNumberBox.getxCorInBoard();
+        int parenY = parentNumberBox.getyCorInBoard();
 
-        int kidX = numberField.getXX();
-        int kidY = numberField.getYY();
+        int kidX = numberField.getxCorInBox();
+        int kidY = numberField.getyCorInBox();
 
         this.numbers[parenX*3+kidX][parenY*3 + kidY] = numberField.getValue();
     }
